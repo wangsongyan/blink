@@ -124,6 +124,10 @@ func (view *WebView) processMessage(msg *win.MSG) bool {
 	return true
 }
 
+func (view *WebView) SetParent(parentHWnd win.HWND){
+	win.SetParent(view.handle, parentHWnd)
+}
+
 func (view *WebView) MoveToCenter() {
 	var width int32 = 0
 	var height int32 = 0
@@ -178,6 +182,18 @@ func (view *WebView) GetWebTitle() string {
 	done := make(chan string)
 	jobQueue <- func() {
 		done <- C.GoString(C.getWebTitle(view.window))
+		close(done)
+	}
+	return <-done
+}
+
+func (view *WebView) GetCookie() string {
+	//等待document ready,文档没有ready,网页的标题获取不到
+	<-view.DocumentReady
+
+	done := make(chan string)
+	jobQueue <- func() {
+		done <- C.GoString(C.getCookie(view.window))
 		close(done)
 	}
 	return <-done

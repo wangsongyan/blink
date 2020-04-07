@@ -40,6 +40,10 @@ const char *getWebTitle(wkeWebView window)
     return wkeGetTitle(window);
 }
 
+const char *getCookie(wkeWebView window) {
+    return wkeGetCookie(window);
+}
+
 void destroyWindow(wkeWebView window)
 {
     wkeDestroyWebWindow(window);

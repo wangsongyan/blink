@@ -30,5 +30,7 @@ void goOnWindowDestroyCallback(wkeWebView window, void *param);
 void goOnDocumentReadyCallback(wkeWebView window);
 //title changed回调
 void goOnTitleChangedCallback(wkeWebView window, const utf8 *title);
+//url changed回调
+void goOnURLChangedCallback(wkeWebView window, const utf8 *url);
 /*****************event end**************/
 #endif

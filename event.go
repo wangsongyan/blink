@@ -32,3 +32,14 @@ func goOnTitleChangedCallback(window C.wkeWebView, titleString *C.char) {
 		view.Emit("titleChanged", view, titleGoString)
 	}()
 }
+
+//export goOnURLChangedCallback
+func goOnURLChangedCallback(window C.wkeWebView, urlString *C.char) {
+	//把C过来的字符串转化为golang的
+	urlGoString := C.GoString(urlString)
+
+	go func() {
+		view := getWebViewByWindow(window)
+		view.Emit("urlChanged", view, urlGoString)
+	}()
+}

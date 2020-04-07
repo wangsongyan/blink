@@ -21,6 +21,12 @@ void WKE_CALL_TYPE onTitleChangedCallback(wkeWebView window, void *param, const 
     goOnTitleChangedCallback(window, wkeGetString(title));
 }
 
+
+void WKE_CALL_TYPE onURLChangedCallback(wkeWebView window, void *param, const wkeString urlstr)
+{
+    goOnURLChangedCallback(window, wkeGetString(urlstr));
+}
+
 void initWebViewEvent(wkeWebView window)
 {
     //窗口被销毁
@@ -31,4 +37,6 @@ void initWebViewEvent(wkeWebView window)
     wkeOnDocumentReady2(window, onDocumentReady2Callback, NULL);
     //title changed
     wkeOnTitleChanged(window, onTitleChangedCallback, NULL);
+    //url changed
+    wkeOnURLChanged(window, onURLChangedCallback, NULL);
 }
